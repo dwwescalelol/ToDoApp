@@ -9,6 +9,9 @@ interface ToDo {
 }
 
 const todos = ref<ToDo[]>([]);
+const todosOrdererd = () => {
+  return todos.value.slice().reverse();
+};
 const name = ref("");
 const content_error = ref("");
 const category_error = ref("");
@@ -110,7 +113,10 @@ onMounted(() => {
     <section class="todo-list">
       <h3>TODO LIST</h3>
       <div class="list">
-        <div v-for="todo in todos" :class="`todo-item ${todo.done && 'done'}`">
+        <div
+          v-for="todo in todosOrdererd()"
+          :class="`todo-item ${todo.done && 'done'}`"
+        >
           <label>
             <input type="checkbox" v-model="todo.done" />
             <span :class="`bubble ${todo.category}`"></span>
